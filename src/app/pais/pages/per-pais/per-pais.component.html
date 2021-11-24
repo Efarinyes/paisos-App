@@ -1,0 +1,39 @@
+
+<div class="animate__animated animate__fadeIn">
+    <h2>Cercar País per nom</h2>
+    <hr>
+    <div class="row">
+        <div class="col">
+            <app-pais-input 
+                (onEnter) = 'cercar($event)'
+                (onDebounce) = 'suggeriments($event)'
+                placeholder = 'Trobar país per nom...'
+                >
+            </app-pais-input>
+        </div>
+    </div>
+    <ul *ngIf = 'mostrarSuggerits'
+        class = 'list-group'>
+        <li  
+            class ='list-group-item list-group-item-action' 
+            *ngFor= 'let pais of paisosSuggerits' >
+            <a class = 'nav-link' [routerLink] = "['/pais', pais.cca3]"> {{ pais.name.common }} </a>
+        </li>
+        <li
+            class = 'list-group-item list-group-item-action'
+            (click) = 'cercarSuggerits( terme )'
+            >
+            <a class = 'nav-link'> Cercar " {{terme}}"</a>
+
+        </li>
+    </ul>
+    <hr>
+    <div *ngIf = 'tenimError' class="alert alert-danger">
+        No hi ha resultats amb el terme: {{ terme }}
+    </div>
+    <div *ngIf = 'paisos.length > 0'  class="row">
+        <div class="col">
+            <app-pais-table [paisos]='paisos'></app-pais-table>
+        </div>
+    </div>
+</div>

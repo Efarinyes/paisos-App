@@ -1,0 +1,30 @@
+
+<div class="animate__animated animate__fadeIn">
+    <h2> Troba països per regió <span> {{ regioActiva | titlecase}} </span></h2>
+    <hr>
+    <h5> Seleciona una regió </h5>
+    <div class="row ">
+        <div class="col mt-2">
+    
+            <!-- [class.btn-primary] = 'regio === regioActiva'  Funcional però no optim -->
+            <!-- [ngClass] = "{
+                'btn-primary': regioActiva === regio,
+                'btn-outline-primary': regioActiva !== regio
+            }"  Més òptim però amb alguna defecte de rendiment (evaluacio de les dues condicions si o si )--> 
+    
+            <button 
+                *ngFor='let regio of regions' 
+                [class] = "cambiaClaseCSS(regio) "
+                
+                (click)="activarRegio(regio)"
+                >
+                    {{ regio | titlecase }}
+            </button>
+        </div>
+       <div *ngIf = 'paisos.length > 0'>
+           <div class="col">
+            <app-pais-table [paisos]='paisos'></app-pais-table>
+           </div>
+       </div>
+    </div>
+</div>

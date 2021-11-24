@@ -1,0 +1,24 @@
+
+
+<div class="animate__animated animate__fadeIn">
+    <h2>Cercar Pais per Capital</h2>
+    <hr>
+    <div class="row">
+        <div class="col">
+            <app-pais-input 
+                (onEnter) = 'cercar($event)'
+                placeholder = 'Trobar país per capital...'
+                >
+            </app-pais-input>
+        </div>
+    </div>
+    <hr>
+    <div *ngIf = 'tenimError' class="alert alert-danger">
+        No hi ha resultats amb el terme: {{ terme }}
+    </div>
+    <div *ngIf = 'paisos.length > 0'  class="row">
+        <div class="col">
+            <app-pais-table [paisos]='paisos'></app-pais-table>
+        </div>
+    </div>
+</div>
